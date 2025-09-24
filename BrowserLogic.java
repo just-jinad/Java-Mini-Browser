@@ -4,37 +4,27 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import javax.swing.JEditorPane;
-
+import javax.swing.JLabel;
 
 public class BrowserLogic {
-    // JEditorPane contentPane;
 
-    // public BrowserLogic(JEditorPane contentPane){
-    //     this.contentPane = contentPane;
-    // }
-
-        
-       public void loadPage(JEditorPane contentPane,  String userUrl) {
+    public void loadPage(JEditorPane contentPane, String userUrl, JLabel statusLabel) {
         try {
             if (!userUrl.startsWith("https://") && !userUrl.startsWith("http://")) {
                 userUrl = "https://" + userUrl;
             }
 
-            // statusLabel.setText("Loading...");
-
-            // Check if URL is reachable before loading
             int responseCode = checkURLStatus(userUrl);
             if (responseCode == 200) {
                 contentPane.setPage(userUrl);
-                // addToHistory(userUrl);
-                // statusLabel.setText("Loaded Successfully");
+                statusLabel.setText("Page Loaded!");
             } else {
                 contentPane.setText("<h3>Error: Unable to load page (HTTP " + responseCode + ")</h3>");
-                // statusLabel.setText("Error: " + responseCode);
+                statusLabel.setText("Unable to Load page...");
             }
         } catch (IOException ex) {
             contentPane.setText("<h3>Error loading page: " + ex.getMessage() + "</h3>");
-            // statusLabel.setText("Failed to Load");
+            statusLabel.setText("An error occurred: " + ex.getMessage());
         }
     }
 
@@ -51,7 +41,5 @@ public class BrowserLogic {
             return -1; // Failed to connect
         }
     }
-
-
 
 }

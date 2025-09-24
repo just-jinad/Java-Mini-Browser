@@ -18,9 +18,10 @@ public class BrowserInterface extends JFrame {
     protected JTextField addressBar;
     protected JScrollPane scrollPane;
     protected JMenuBar menuBar;
-    // protected JLabel statusLabel;
+    protected JLabel statusLabel;
     protected JMenu bMenu;
     String userUrl;
+    String userURL;
     
     public BrowserInterface(){
         uiInit();
@@ -39,6 +40,7 @@ public class BrowserInterface extends JFrame {
       goBtn = new JButton("Go");
       reloadBtn = new JButton("🔄️");
       homeBtn = new JButton("🏠");
+      statusLabel = new JLabel("Ready");
 
       addressBar = new JTextField(80);
 
@@ -57,13 +59,13 @@ public class BrowserInterface extends JFrame {
       reloadBtn.setToolTipText("refresh");
       goBtn.setToolTipText("go");
 
+      // Search key logics
       goBtn.addActionListener(e->{
         System.out.println("I dy work");
         userUrl = addressBar.getText();
-        lg.loadPage(contentPane, userUrl);   
+        lg.loadPage(contentPane, userUrl, statusLabel);   
         System.out.println(userUrl);
     });
-
     }
 
     public void layoutSetup(){
@@ -72,15 +74,15 @@ public class BrowserInterface extends JFrame {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         panel.add(forwardBtn);
         panel.add(backBtn);
+        panel.add(reloadBtn);
+        panel.add(homeBtn);
         panel.add(new JLabel("URL"));
         panel.add(addressBar);
         panel.add(goBtn);
-        panel.add(homeBtn);
-        panel.add(reloadBtn);
 
         add(panel, BorderLayout.NORTH);
         add(scrollPane, BorderLayout.CENTER);
-        // add(statusLabel, BorderLayout.NORTH);
+        add(statusLabel, BorderLayout.SOUTH);
 
     }
 
