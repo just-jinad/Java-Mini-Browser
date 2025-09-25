@@ -1,7 +1,5 @@
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -92,7 +90,6 @@ public class BrowserInterface extends JFrame {
     }
 
     public void homePage() {
-        // homepage
         addressBar.setText(homePage);
         lg.loadPage(contentPane, homePage, statusLabel);
         history.add(homePage);
@@ -108,6 +105,7 @@ public class BrowserInterface extends JFrame {
                 currentIndex--;
                 String backward = history.get(currentIndex);
                 lg.loadPage(contentPane, backward, statusLabel);
+                addressBar.setText(backward);
                 navButton();
             } else if (history.size() == 0) {
                 backBtn.setEnabled(false);
@@ -121,6 +119,7 @@ public class BrowserInterface extends JFrame {
                 currentIndex++;
                 String forward = history.get(currentIndex);
                 lg.loadPage(contentPane, forward, statusLabel);
+                addressBar.setText(forward);
                 navButton();
             }
         });
@@ -129,12 +128,11 @@ public class BrowserInterface extends JFrame {
     public void navButton() {
         if (currentIndex > 0) {
             backBtn.setEnabled(true);
-        }else{
+        } else {
             backBtn.setEnabled(false);
         }
 
-
-        forwardBtn.setEnabled(currentIndex < history.size() -1);
+        forwardBtn.setEnabled(currentIndex < history.size() - 1);
     }
 
     public void layoutSetup() {
