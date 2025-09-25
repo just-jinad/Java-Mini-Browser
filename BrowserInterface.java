@@ -87,11 +87,10 @@ public class BrowserInterface extends JFrame {
 
         backLogic();
         homePage();
-        // forwardLogic();
+        forwardLogic();
 
     }
 
-    
     public void homePage() {
         // homepage
         addressBar.setText(homePage);
@@ -100,10 +99,9 @@ public class BrowserInterface extends JFrame {
         System.out.println("This was consoled from the homepage: " + history.size());
         currentIndex = history.size() - 1;
         System.out.println("this is the index from the homepage: " + currentIndex);
-        
+
     }
 
-    
     public void backLogic() {
         backBtn.addActionListener(e -> {
             if (currentIndex > 0) {
@@ -111,30 +109,34 @@ public class BrowserInterface extends JFrame {
                 String backward = history.get(currentIndex);
                 lg.loadPage(contentPane, backward, statusLabel);
                 navButton();
-            }else if(history.size() == 0){
+            } else if (history.size() == 0) {
                 backBtn.setEnabled(false);
             }
         });
     }
-  
-    
 
     public void forwardLogic() {
         forwardBtn.addActionListener(e -> {
-            if (currentIndex == history.size() - 1) {
+            if (currentIndex < history.size() - 1) {
                 currentIndex++;
                 String forward = history.get(currentIndex);
                 lg.loadPage(contentPane, forward, statusLabel);
+                navButton();
             }
         });
     }
-    
+
     public void navButton() {
-        if (history.size() > 0) {
+        if (currentIndex > 0) {
             backBtn.setEnabled(true);
+        }else{
+            backBtn.setEnabled(false);
         }
-        forwardBtn.setEnabled(currentIndex == history.size());
+
+
+        forwardBtn.setEnabled(currentIndex < history.size() -1);
     }
+
     public void layoutSetup() {
         setLayout(new BorderLayout());
 
