@@ -68,7 +68,7 @@ public class BrowserInterface extends JFrame {
             System.out.println("I dy work");
             userUrl = addressBar.getText();
             lg.loadPage(contentPane, userUrl, statusLabel);
-            System.out.println(userUrl);
+            System.out.println(userUrl); 
         });
         // The ActionListener interface in Java is designed to handle action events
         // generically.
